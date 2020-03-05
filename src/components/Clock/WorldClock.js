@@ -22,7 +22,8 @@ class WorldClock   extends React.Component {
   tick() {
     fetch("http://worldtimeapi.org/api/timezone/America/Fortaleza").then(res => res.json()).then(
       (result) => {
-        let time = new Date(result.utc_datetime).toUTCString();
+        let time = new Date(result.toString);
+        console.log("fetched -> "+result)
         this.setState({
           isLoaded: true,
           date: time
@@ -30,7 +31,7 @@ class WorldClock   extends React.Component {
       },
       (error) => {
         this.setState({
-          isLoaded: false       
+          isLoaded: true       
         });
       }
     );
@@ -45,7 +46,7 @@ class WorldClock   extends React.Component {
     else{
     return (
       <div>
-        <h2>It is {date}.</h2>
+        <h2>It is {date.getHours()}.</h2>
         <p>{local}</p>
       </div>
     );
