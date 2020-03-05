@@ -16,13 +16,16 @@ class WorldClock   extends React.Component {
       () => this.tick(),
       1000
     );
-    fetch("http://worldtimeapi.org/api/timezone/America/Fortaleza")
-    .then(res => res.json())
-    .then(
+
+  }
+
+  tick() {
+    fetch("http://worldtimeapi.org/api/timezone/America/Fortaleza").then(res => res.json()).then(
       (result) => {
+        let time = new Date(result.utc_datetime).toTimeString();
         this.setState({
           isLoaded: true,
-          date: result.utc_datetime
+          date: time
         });
       },
       (error) => {
@@ -31,26 +34,19 @@ class WorldClock   extends React.Component {
           error
         });
       }
-    )
-  }
-
-  tick() {
-    this.setState({
-      date: new Date(),
-      local: "mudou"
-    });
-    this.state = {date: new Date};
+    );
   }
 
   render() {
+    let {date, local,isLoaded} = this.state;
+
     if (!isLoaded){
       return (<h2>Loading...</h2>);
     }
     else{
-      let {date, local} = this.state;
     return (
       <div>
-        <h2>It is {date.toLocaleTimeString()}.</h2>
+        <h2>It is {date}.</h2>
         <p>{local}</p>
       </div>
     );
