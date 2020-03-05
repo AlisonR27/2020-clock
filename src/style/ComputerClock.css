@@ -1,0 +1,11 @@
+table{
+    background-color:#252525;
+}
+table td{
+    padding: 0.6em 1.5em;
+    border-left: 1px solid #d8d8d8;
+    color: #d8d8d8;
+}
+table td:first-of-type{
+    border-left: none;
+}
